@@ -1,0 +1,38 @@
+type Member {
+	userId: String
+	password: String
+	name: String
+	email: String
+    department: Department
+}
+
+type Department {
+	departmentId: String
+	departmentName: String
+}
+
+type MemberPage {
+    content: [Member]
+    totalElements: Int
+    totalPages: Int
+}
+
+
+
+input MemberInput {
+	userId: String
+	password: String
+	name: String
+	email: String
+    departmentId: String
+}
+
+extend type Query {
+	members(page: Int = 0, size: Int = 10): MemberPage
+	member(id: String): Member
+}
+
+
+extend type Mutation {
+	addMember(member: MemberInput) : Member
+}
